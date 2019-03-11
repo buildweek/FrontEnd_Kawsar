@@ -22,7 +22,6 @@ const Nav = () => {
   return ( 
     <NavBar>
       <NavLink  className= 'bar' exact to='/'>Home</NavLink>
-      <NavLink  className= 'bar' to='/todo-form'>Add Task</NavLink>
     </NavBar>
    );
 }

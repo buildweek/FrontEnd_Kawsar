@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
 import axios from 'axios';
 import { Route,} from 'react-router-dom';
@@ -11,7 +10,7 @@ class App extends Component {
     super(props);
     this.state = {
       todos: [], 
-      updatedTodo : {}
+      completed: false,
     };
   }
 ///////////////////////////////////////////////////////////////////////
@@ -25,61 +24,62 @@ class App extends Component {
     .catch(err => console.log(err))
   }
 /////////////////////////////////////////////////////////////////////
-  addTodo = todo =>{
-    axios
-      .post('http://localhost:3333/todos', todo)
-      .then(res=> {this.setState({todos: res.data})})
-      .catch(console.log);
-  }
+  // addTodo = todo =>{
+  //   axios
+  //     .post('http://localhost:3333/todos', todo)
+  //     .then(res=> {this.setState({todos: res.data})})
+  //     .catch(console.log);
+  // }
 ///////////////////////////////////////////////////////////////////////
   deleteTodo = id => {
     axios
       .delete(`http://localhost:3333/todos/${id}`)
       .then(res=> { this.setState({todos: res.data}) ;
-         this.props.history.push("/" );})
+         this.props.history.push("/todos" );})
       .catch(console.log);
   }
-///////////////////////////////////////////////////////////////////////
-  setUpdatedTodo = (id, todo) => {
-    todo.id = id;
-    this.setState({updatedTodo: todo});
-  }
-
-  updateTodo = (todo) => {
-    axios.put(`http://localhost:3333/todos/${this.state.updatedTodo.id}`, todo)
-    .then(res => {
-      this.setState({todos: res.data});
-    })
-    .catch(err => {
-      console.log(err);
-    })
-  }
-  updateList = (todoList) => {
-    this.setState({todos: todoList});
-  }
 
 ///////////////////////////////////////////////////////////////////////
+toggleCompleted = todo => {
+  this.setState(previousState => {
+    const updatedList = previousState.todos.map(toDoItem => {
+      if (toDoItem.todo === todo) {
+        toDoItem.completed = !toDoItem.completed;
+      }
+      return toDoItem;
+    });
+    return {
+      todos: updatedList
+    };
+  });
+};
+///////////////////////////////////////////////////////////////////////
+clearCompleted = (e) =>{
+  e.preventDefault()
+  e.persist()
+  this.setState(preState =>{
+    const clearedList = preState.todos.filter(
+      todoItem => !todoItem.completed
+    );
+    return {
+      todos:  clearedList
+    };
+  });
+}
 render() {
   return (
     <div className="App">
       <Route path= '/' render ={ (props)=> <Nav/> }/>
-      
-      <Route exact path="/todo-form" render ={ (props) => 
-          <TodoForm updateList={this.updateList} {...props}/>} 
-      />
-      <Route path="/todo-form/:id" render={ (props) => 
-          <TodoForm 
-            updateTodo={this.updateTodo} 
-            info={this.state.updatedTodo}
-            {...props}/>} 
-      />
       <Route exact path="/" render={(props) => 
           <TodoList 
             {...props}
             todos={this.state.todos} 
-            loading={this.state.loading} 
             deleteTodo={this.deleteTodo}
-            updateTodo={this.setUpdatedTodo} />} 
+            completed ={this.state.completed}
+            toggleCompleted= {this.toggleCompleted}
+            clearCompleted={this.clearCompleted}
+            addTodo = {this.addTodo}
+           />} 
       />
     </div>
   );
