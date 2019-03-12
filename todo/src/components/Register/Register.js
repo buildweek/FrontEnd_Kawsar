@@ -86,6 +86,14 @@ class Register extends React.Component {
                   value={this.state.password}
                   onChange={this.handleInput} 
               />
+              <input
+                  className ='input-form'
+                  type= 'password'
+                  placeholder= 'Confirm Password'
+                  name='password'
+                  value={this.state.password}
+                  onChange={this.handleInput} 
+              />
               <Button color = 'success' onClick={this.handlePassword}> Register</Button>
           </Form>
       </RegisterBar>

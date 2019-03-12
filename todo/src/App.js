@@ -18,7 +18,7 @@ class App extends Component {
 
   componentDidMount(){
   axios
-    .get("http://localhost:3333/todos")
+    .get("https://buildweek-wunderlist.herokuapp.com/api/lists")
     .then(response => {
       this.setState({ todos: response.data })
     })
@@ -27,7 +27,7 @@ class App extends Component {
 
   deleteTodo = id => {
     axios
-      .delete(`http://localhost:3333/todos/${id}`)
+      .delete(`https://buildweek-wunderlist.herokuapp.com/api/lists${id}`)
       .then(res=> { this.setState({todos: res.data}) ;
          this.props.history.push("/todos" );})
       .catch(console.log);
@@ -65,7 +65,7 @@ render() {
     <div className="App">
       <Route path ='/login' component = {Login} />
       <Route path ='/register' component = {Register} />
-      <Route path= '/' component = {Nav} />
+      <Route exact path= '/' component = {Nav} />
       <Route exact path="/" render={() => 
           <TodoList 
             todos={this.state.todos} 

@@ -42,9 +42,7 @@ todo-tabs h3 {
 .todo-tabs .selected {
   background-color: rgb(94, 155, 173);
   box-shadow: inset 3px 3px 5px rgb(0, 0, 0, .25);
-}
-
-     
+}    
 `;
 class TodoList extends Component {
   constructor(props) {
@@ -59,7 +57,7 @@ class TodoList extends Component {
   addTodo = event => {
     event.preventDefault();
     axios
-      .post('http://localhost:3333/todos', this.state.todo)
+      .post('https://buildweek-wunderlist.herokuapp.com/api/lists', this.state.todo)
       .then(res => {
         this.props.history.push('/todos');
       })

@@ -62,6 +62,7 @@ class Login extends React.Component {
     this.setState({ [event.target.name]: event.target.value })
   };
   handlePassword = e => { 
+     e.preventDefault();
       axios
           .post('https://buildweek-wunderlist.herokuapp.com/api/auth/login', this.state.user)
           .then(res=> console.log(res) )
