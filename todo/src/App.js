@@ -5,6 +5,7 @@ import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import { Route,} from 'react-router-dom';
 import Nav from './components/Nav';
+import './App.css';
 
 class App extends Component {
   constructor(props) {
@@ -17,13 +18,17 @@ class App extends Component {
 ///////////////////////////////////////////////////////////////////////
 
   componentDidMount(){
-  axios
-    .get("https://buildweek-wunderlist.herokuapp.com/api/lists")
-    .then(response => {
-      console.log(response);
-      this.setState({ todos: response.data })
-    })
-    .catch(err => console.log(err))
+    var token = localStorage.getItem(`token`)
+    var request = {
+      headers: { authorization : token }
+    }
+    axios
+      .get("https://buildweek-wunderlist.herokuapp.com/api/lists", request)
+      .then(response => {
+        console.log(response);
+        this.setState({ todos: response.data })
+      })
+      .catch(err => console.log(err))
   }
 
   deleteTodo = id => {

@@ -4,11 +4,11 @@ import styled from 'styled-components';
 const NavBar = styled.div` 
     display : flex;
     flex-wrap: wrap;
-    background: black;
     justify-content: flex-end;
     text-size: 15px;
-    min-height: 20px;
-    padding: 5px;
+    height: 50px;
+    padding: 0px;
+    background: blue;
     .bar{
       margin: 15px;
       text-decoration: none;

@@ -10,14 +10,14 @@ const LoginBar = styled.div`
       .login-form{
           display: flex;
           flex-wrap: wrap;
-          width: 30%;
+          width: 70%;
           margin: 5% 20% 0 0;
           justify-content: center;
           border: 1px solid rgb(240, 229, 229);
           padding: 5% 0 5% 0;
           h1{
               font-size: 35px;
-              font-family: Luminari, 'fantasy' ;
+              
           }
           .input-form{
               width : 70%;
@@ -35,11 +35,10 @@ const LoginBar = styled.div`
               font-size: 14px;
           }
           button:hover{
-              background: pink;
-              color: rgb(10, 10, 82);
+              background: green;
+              color: white;
           }
           .textp{
-              border: 1px solid rgb(240, 229, 229);
               width: 70%;
               text-align: center;
               margin: 2%;
@@ -64,9 +63,11 @@ class Login extends React.Component {
      e.preventDefault();
       axios
           .post('https://buildweek-wunderlist.herokuapp.com/api/auth/login', this.state)
-          .then(res=> console.log(res) )
-          .catch(err=> console.log(err))
-          // if(res.status === 200)
+          .then(res => { 
+            localStorage.setItem("token", res.data.token);
+            this.props.history.push(`/`);
+         })
+         .catch(err => console.log(err))
           
     }
 
@@ -93,7 +94,7 @@ class Login extends React.Component {
               />
               
               <Button color = 'success' onClick={this.handlePassword}>Log in</Button>
-              <span className= 'textp'> <p> Don't have and account ? <strong>Register</strong></p></span>
+              <span className= 'textp'> <p> Don't have and account ? <button>Register</button></p></span>
           </Form>
       </LoginBar>
     );
