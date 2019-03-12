@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Button, Form } from 'reactstrap';
 import Axios from 'axios';
-const LoginBar = styled.div`
+const RegisterBar = styled.div`
       display : flex;
       flex-wrap: wrap;
       justify-content: flex-end;
@@ -65,14 +65,14 @@ class Login extends React.Component {
       localStorage.setItem('user', this.state.user.username);
       localStorage.setItem('password', this.state.user.password);
       window.location.reload();
-      // axios
-      //     .post('https://buildweek-wunderlist.herokuapp.com/api/auth/login', this.state.user)
-      //     .then(res=> localStorage.setItem('token': res.token))
-      //     module.exports = server;
+       axios
+        .post('https://buildweek-wunderlist.herokuapp.com/api/auth/register', this.state.user)
+        .then(res=> localStorage.setItem('token': res.token))
+        module.exports = server;
     };
   render(){
     return(
-      <LoginBar className ='login-box'>
+      <RegisterBar className ='login-box'>
           <Form  className ='login-form'>
               <h1 > Welcome to WunderList</h1>
               <input 
@@ -92,12 +92,10 @@ class Login extends React.Component {
                   onChange={this.handleInput} 
               />
               
-              <Button color = 'success' onClick={this.handlePassword}>Log in</Button>
-              <span className= 'textp'> <p> Don't have and account ? <strong>Register</strong></p></span>
+              <Button color = 'success' onClick={this.handlePassword}> Register</Button>
           </Form>
-      </LoginBar>
+      </RegisterBar>
     );
   }
-
 }  
 export default Login;

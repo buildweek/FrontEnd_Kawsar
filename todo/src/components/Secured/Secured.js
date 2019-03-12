@@ -64,10 +64,9 @@ render() {
       <Route path= '/' render ={ (props)=> <Nav/> }/>
       <Route exact path="/" render={(props) => 
           <TodoList 
-            {...props}
             todos={this.state.todos} 
             deleteTodo={this.deleteTodo}
-            completed ={this.state.completed}
+            completed ={this.completed}
             toggleCompleted= {this.toggleCompleted}
             clearCompleted={this.clearCompleted}
             addTodo = {this.addTodo}

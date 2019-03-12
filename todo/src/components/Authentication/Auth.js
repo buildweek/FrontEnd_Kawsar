@@ -10,9 +10,9 @@ const Auth = App => Login =>
     }
     //////////////////////////////////////////////////////////
     componentDidMount() {
-      if (localStorage.getItem('user') === 'md') {
+      if (localStorage.getItem('user') === '') {
           this.setState({ permission: true });
-      } else if (localStorage.getItem('password') === 'mypassword')  {
+      } else if (localStorage.getItem('password') === '')  {
         this.setState({ permission: true });
       } else {
           this.setState({ permission: false });
