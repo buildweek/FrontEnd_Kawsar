@@ -67,13 +67,15 @@ class TodoList extends Component {
       })
     this.setState({
       todo: '',
+      date: '',
+      des : '',
     });
   }
 
   handleInputChange = e => {
     this.setState({
       ...this.state,
-      todo: e.target.value
+      [e.target.name]: e.target.value 
     });
   }
   toggleShow = tab => {
@@ -87,10 +89,27 @@ class TodoList extends Component {
                  type ='text'
                  className ='inputbox'
                  onChange={this.handleInputChange}
-                 placeholder="..add "
+                 placeholder="Task "
                  value={this.state.todo}
-                 name="..to do"  
+                 name='todo'  
           />
+          <input 
+                 type ='number'
+                 className ='inputbox'
+                 onChange={this.handleInputChange}
+                 placeholder="Due Date"
+                 value={this.state.date}
+                 name="date"  
+          />
+          <input 
+                 type ='text'
+                 className ='inputbox'
+                 onChange={this.handleInputChange}
+                 placeholder="Description "
+                 value={this.state.des}
+                 name="des"  
+          />
+
           <button type= 'submit' className='button'>Add</button>
             <div>
               {this.state.show === 'all' ? this.props.todos.map((todoItem, index) => {
