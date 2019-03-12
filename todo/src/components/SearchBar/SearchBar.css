@@ -1,0 +1,90 @@
+.search-wrap{
+    width: 100%;
+    border-bottom: 1px solid pink;
+    margin-bottom:5%;
+}
+.search{
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-left: 10%;
+}
+@media (max-width: 500px) {
+    .search {
+        width: 130%;
+    }
+}
+.left-search{
+    width: 33%;
+    display: flex;
+    flex-wrap: wrap;
+}
+@media (max-width: 500px) {
+    .left-search {
+        margin-left: -45%;
+        width: 40%;
+    }
+}
+
+h1{
+    font-family: Luminari,'fantasy' ;
+    margin: 0;
+    font-size: 22px;
+    padding: 2%;
+}
+@media (max-width: 500px) {
+    .insta-head {
+        font-size: 20px;
+        padding-top: 0%;
+    }
+}
+.left-search img{
+    width: 70px;
+    height: 70px;
+    margin-top: -2%;
+}
+
+@media (max-width: 500px) {
+    #insta-logo{
+        width: 40px;
+        height: 40px;
+    }
+}
+
+.mid-search{
+    width: 33%;
+}
+@media (max-width: 500px) {
+    .mid-search {
+        display: none;
+       
+    }
+}
+#search-bar{
+    width: 70%;
+    text-align: center;
+    font-size: 25px;
+    margin-top: 1rem;
+}
+.right-search{
+    width: 30%;
+    display: flex;
+    justify-content: flex-end;
+}
+#like-icon{
+    width: 30px;
+    height: 30px;
+    padding-left: 4%;
+}
+#profile{
+    width: 30px;
+    height: 30px;
+    padding-left: 4%;
+}
+#explore{
+    width: 30px;
+    height: 30px;
+    padding-left: 4%;
+}
+
