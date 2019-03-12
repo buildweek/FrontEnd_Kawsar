@@ -54,13 +54,12 @@ class TodoList extends Component {
       show: 'all'
     };
   } 
-  componentDidMount = () => {
-    if(this.props.info) this.setState({todo: this.props.info.todo});
-  }
+  
+  
   addTodo = event => {
     event.preventDefault();
     axios
-      .post('http://localhost:3333/todos', this.state)
+      .post('http://localhost:3333/todos', this.state.todo)
       .then(res => {
         this.props.history.push('/todos');
       })

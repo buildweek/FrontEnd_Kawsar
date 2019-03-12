@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Button, Form } from 'reactstrap';
-import Axios from 'axios';
+import axios from 'axios';
 const LoginBar = styled.div`
       display : flex;
       flex-wrap: wrap;
@@ -61,15 +61,13 @@ class Login extends React.Component {
   handleInput = event => {
     this.setState({ [event.target.name]: event.target.value })
   };
-  handlePassword = e => {
-      localStorage.setItem('user', this.state.user.username);
-      localStorage.setItem('password', this.state.user.password);
-      window.location.reload();
-      // axios
-      //     .post('https://buildweek-wunderlist.herokuapp.com/api/auth/login', this.state.user)
-      //     .then(res=> localStorage.setItem('token': res.token))
-      //     module.exports = server;
-    };
+  handlePassword = e => { 
+      axios
+          .post('https://buildweek-wunderlist.herokuapp.com/api/auth/login', this.state.user)
+          .then(res=> console.log(res) )
+          .catch(err=> console.log(err))
+    }
+
   render(){
     return(
       <LoginBar className ='login-box'>

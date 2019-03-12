@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Button, Form } from 'reactstrap';
-import Axios from 'axios';
+import axios from 'axios';
 const RegisterBar = styled.div`
       display : flex;
       flex-wrap: wrap;
@@ -48,7 +48,7 @@ const RegisterBar = styled.div`
 
 `;
 
-class Login extends React.Component {
+class Register extends React.Component {
   constructor() {
       super();
       this.state = {
@@ -62,19 +62,14 @@ class Login extends React.Component {
     this.setState({ [event.target.name]: event.target.value })
   };
   handlePassword = e => {
-      localStorage.setItem('user', this.state.user.username);
-      localStorage.setItem('password', this.state.user.password);
-      window.location.reload();
        axios
         .post('https://buildweek-wunderlist.herokuapp.com/api/auth/register', this.state.user)
-        .then(res=> localStorage.setItem('token': res.token))
-        module.exports = server;
+        .then(res=> console.log(res))
     };
   render(){
     return(
       <RegisterBar className ='login-box'>
           <Form  className ='login-form'>
-              <h1 > Welcome to WunderList</h1>
               <input 
                   className ='input-form'
                   type="text"
@@ -91,11 +86,10 @@ class Login extends React.Component {
                   value={this.state.password}
                   onChange={this.handleInput} 
               />
-              
               <Button color = 'success' onClick={this.handlePassword}> Register</Button>
           </Form>
       </RegisterBar>
     );
   }
 }  
-export default Login;
+export default Register;
