@@ -52,10 +52,8 @@ class Register extends React.Component {
   constructor() {
       super();
       this.state = {
-        user : {
           username: '',
           password: '',
-        }
       };
   }
   handleInput = event => {
@@ -63,7 +61,7 @@ class Register extends React.Component {
   };
   handlePassword = e => {
        axios
-        .post('https://buildweek-wunderlist.herokuapp.com/api/auth/register', this.state.user)
+        .post('https://buildweek-wunderlist.herokuapp.com/api/auth/register', this.state)
         .then(res=> console.log(res))
     };
   render(){

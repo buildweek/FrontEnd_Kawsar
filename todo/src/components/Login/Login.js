@@ -52,10 +52,9 @@ class Login extends React.Component {
   constructor() {
       super();
       this.state = {
-        user : {
           username: '',
           password: '',
-        }
+      
       };
   }
   handleInput = event => {
@@ -64,9 +63,11 @@ class Login extends React.Component {
   handlePassword = e => { 
      e.preventDefault();
       axios
-          .post('https://buildweek-wunderlist.herokuapp.com/api/auth/login', this.state.user)
+          .post('https://buildweek-wunderlist.herokuapp.com/api/auth/login', this.state)
           .then(res=> console.log(res) )
           .catch(err=> console.log(err))
+          // if(res.status === 200)
+          
     }
 
   render(){
@@ -97,6 +98,6 @@ class Login extends React.Component {
       </LoginBar>
     );
   }
+}
 
-}  
 export default Login;

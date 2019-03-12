@@ -59,7 +59,8 @@ class TodoList extends Component {
     axios
       .post('https://buildweek-wunderlist.herokuapp.com/api/lists', this.state.todo)
       .then(res => {
-        this.props.history.push('/todos');
+        console.log(res);
+        this.props.history.push('/lists');
       })
       .catch(err => {
         console.log(err);

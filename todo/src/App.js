@@ -20,6 +20,7 @@ class App extends Component {
   axios
     .get("https://buildweek-wunderlist.herokuapp.com/api/lists")
     .then(response => {
+      console.log(response);
       this.setState({ todos: response.data })
     })
     .catch(err => console.log(err))
