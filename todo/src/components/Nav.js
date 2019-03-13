@@ -1,6 +1,28 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+
+const Nav = (props) => {
+  return ( 
+    <NavBar>
+      <div className= 'wrapper'>
+      <NavLink  className= 'bar' exact to='/'> Home </NavLink>
+      <div className= 'search' >
+                        <input  className = 'input-search'
+                                name = 'input search'
+                                id='search-bar' 
+                                type="search"        
+                                placeholder= " 🔍 Search your tasks"
+                                onKeyDown={props.searchForLists}
+                            />
+      </div>
+      </div>
+    </NavBar>
+   );
+}
+
+export default Nav; 
+
 const NavBar = styled.div` 
     display : flex;
     flex-wrap: wrap;
@@ -33,24 +55,3 @@ const NavBar = styled.div`
       }
     }
 `;
-
-const Nav = (props) => {
-  return ( 
-    <NavBar>
-      <div className= 'wrapper'>
-      <NavLink  className= 'bar' exact to='/'>Home</NavLink>
-      <div className= 'search' >
-                        <input  className = 'input-search'
-                                name = 'input search'
-                                id='search-bar' 
-                                type="search"        
-                                placeholder= " 🔍 Search your tasks"
-                                onKeyDown={props.searchForLists}
-                            />
-      </div>
-      </div>
-    </NavBar>
-   );
-}
-
-export default Nav; 

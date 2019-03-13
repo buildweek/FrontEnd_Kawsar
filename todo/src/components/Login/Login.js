@@ -22,7 +22,7 @@ class Login extends React.Component {
           .post('https://buildweek-wunderlist.herokuapp.com/api/login', this.state)
           .then(res => { 
             localStorage.setItem("token", res.data.token);
-            this.props.history.push(`/`);
+            this.props.history.push(`/lists`);
          })
          .catch(err => console.log(err))
           
@@ -31,7 +31,7 @@ class Login extends React.Component {
   render(){
     return(
       <LoginBar className ='login-box'>
-          <Form  className ='login-form'>
+          <Form  onSubmit={this.handlePassword} className ='login-form'>
               <h1 > Welcome to WunderList</h1>
               <input 
                   className ='input-form'

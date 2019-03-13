@@ -77,8 +77,8 @@ render() {
     <div className="App">
       <Route path ='/login' component = {Login} />
       <Route path ='/register' component = {Register} />
-      <Route exact path= '/' render={() => < Nav searchForLists = {this.searchForLists} />} />
-      <Route exact path="/" render={() => 
+      <Route path= '/' render={() => < Nav searchForLists = {this.searchForLists} />} />
+      <Route exact path="/lists" render={() => 
           <TodoList 
             todos={
               this.state.searchResult.length > 0 ?

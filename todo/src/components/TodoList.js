@@ -8,7 +8,7 @@ class TodoList extends Component {
     this.state = {
       title: '',
       dueDate: '',
-      Description : '',
+      description : '',
       show: 'all',
       completed: false,
       userId: '',
@@ -88,9 +88,8 @@ class TodoList extends Component {
                                               <h3>{todoItem.title} </h3> 
                                               <p>{todoItem.description}</p>
                                               <p>{todoItem.dueDate}</p>
+                                              
                                            </div>
-
-                                           
 
                                       <button onClick={() => this.props.deleteTodo(this.props.id)} className="cross"> clear</button>
                                     </div> 
@@ -103,7 +102,7 @@ class TodoList extends Component {
                                               <p>{todoItem.description}</p>
                                               <p>{todoItem.dueDate}</p>
                                            </div>
-                                           <button onClick={() => this.props.deleteTodo(this.props.id)} className="cross">X</button>
+                                           <button onClick={() => this.props.deleteTodo(this.props.id)} className="cross">clear</button>
                                           </div>
                           } )
                 }
