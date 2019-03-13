@@ -3,36 +3,32 @@ import styled from 'styled-components';
 import { Button, Form } from 'reactstrap';
 import axios from 'axios';
 
-
-class Login extends React.Component {
+class Register extends React.Component {
   constructor() {
       super();
       this.state = {
           username: '',
           password: '',
-      
+          confirmPassword: ''
       };
   }
   handleInput = event => {
     this.setState({ [event.target.name]: event.target.value })
   };
-  handlePassword = e => { 
-     e.preventDefault();
-      axios
-          .post('https://buildweek-wunderlist.herokuapp.com/api/login', this.state)
-          .then(res => { 
-            localStorage.setItem("token", res.data.token);
-            this.props.history.push(`/lists`);
-         })
-         .catch(err => console.log(err))
-          
-    }
-
+  handlePassword = e => {
+       axios
+        .post('https://buildweek-wunderlist.herokuapp.com/api/register', this.state)
+        .then(res => { 
+          localStorage.setItem("token", res.data.token);
+          this.props.history.push(`/login`);
+       })
+       .catch(err => console.log(err))
+    };
   render(){
     return(
-      <LoginBar className ='login-box'>
-          <Form  onSubmit={this.handlePassword} className ='login-form'>
-              <h1 > Welcome to WunderList</h1>
+      <RegisterBar className ='login-box'>
+          <Form  className ='login-form' onSubmit={this.handlePassword}>
+          <div className='input-form' >
               <input 
                   className ='input-form'
                   type="text"
@@ -49,18 +45,24 @@ class Login extends React.Component {
                   value={this.state.password}
                   onChange={this.handleInput} 
               />
-              
-              <Button color = 'success' onClick={this.handlePassword}>Log in</Button>
-              <span className= 'textp'> <p> Don't have and account ? <button>Register</button></p></span>
+              <input
+                  className ='input-form'
+                  type= 'password'
+                  placeholder= 'Confirm Password'
+                  name='confirmPassword'
+                  value={this.state.confirmPassword}
+                  onChange={this.handleInput} 
+              />
+              <Button color = 'success' onClick={this.handlePassword}> Register</Button>  
+              </div>  
           </Form>
-      </LoginBar>
+      </RegisterBar>
     );
   }
-}
+}  
+export default Register;
 
-export default Login;
-
-const LoginBar = styled.div`
+const RegisterBar = styled.div`
       display : flex;
       flex-wrap: wrap;
       justify-content: flex-end;
@@ -74,8 +76,8 @@ const LoginBar = styled.div`
           border: 1px solid rgb(240, 229, 229);
           padding: 5% 0 5% 0;
           @media (min-width: 800px) {
-              width: 30%;
-          }
+            width: 30%;
+         }
           h1{
               font-size: 35px;
               
