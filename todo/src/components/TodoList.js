@@ -81,25 +81,31 @@ class TodoList extends Component {
           <div>
               <div className='task-lists'>
                 {this.state.show === 'all' ? this.props.todos.map((todoItem, index) => {
-                              return <div
+                              return <div className = 'perList'
                                            style={{ textDecoration: todoItem.complete ? 'line-through' : 'none'}}
                                            onClick={e => this.props.toggleCompleted(e, index)} key={index}>
+                                           <div> 
+                                              <h3>{todoItem.title} </h3> 
+                                              <p>{todoItem.description}</p>
+                                              <p>{todoItem.dueDate}</p>
+                                           </div>
 
-                                           {todoItem.title}  
-                                           {todoItem.description}
-                                           {todoItem.dueDate}
+                                           
 
-                                      <button onClick={() => this.props.deleteTodo(this.props.id)} className="cross">X</button>
+                                      <button onClick={() => this.props.deleteTodo(this.props.id)} className="cross"> clear</button>
                                     </div> 
                           }) :
 
                              this.props.todos.filter(todo => todo.complete === this.state.show).map((todoItem, index) => {
-                                  return  <div>
-                                           {todoItem.title}
-                                           {todoItem.des}
-                                           {todoItem.ddate}
+                                  return  <div className = 'perList' >
+                                           <div> 
+                                              <h3>{todoItem.title} </h3> 
+                                              <p>{todoItem.description}</p>
+                                              <p>{todoItem.dueDate}</p>
+                                           </div>
+                                           <button onClick={() => this.props.deleteTodo(this.props.id)} className="cross">X</button>
                                           </div>
-                          })
+                          } )
                 }
               </div>    
               <div className="todo-tabs">
@@ -110,6 +116,7 @@ class TodoList extends Component {
 
               <button className="clear-button" onClick={this.props.clearCompleted}> Clear Completed </button>
         </div>
+        
       </BorderBar>
     );
   } 
@@ -132,9 +139,13 @@ margin: 1%;
     width: 90%;
     margin: .4%;
     padding: .5rem;
+    @media (min-width: 800px) {
+      width: 200px;  
+      margin: auto; 
+    }
   }
   @media (min-width: 800px) {
-    width: 400px;  
+    width: 800px;  
     margin: auto;   
 }
 }
@@ -142,7 +153,7 @@ button{
   cursor:pointer;
   display: flex;
   margin: 5px auto;
-  width: 100px;
+  border: 1px solid #000;
   text-align: center;
   border-radius: 6px;
   color: #6195ed;
@@ -152,6 +163,27 @@ button{
 button:hover{
   background: #6195ed;
   color: white;
+}
+.task-lists{
+  display: flex;
+  flex-wrap: wrap;
+  width: 400px;
+  margin: 1% auto;
+  @media (min-width: 800px) {
+    width: 800px;     
+}
+  .perList{
+    flex-wrap: wrap;
+    padding: 2px;
+    margin: .5% auto;
+    background: rgb(101, 236, 243);
+    border-radius: 10px;
+    width:100%;
+    content-align: left; 
+    @media (min-width: 800px) {
+      width: 48%;  
+    }
+  }
 }
 .todo-tabs {
   width: 60%;
@@ -177,14 +209,11 @@ button:hover{
 
 .cross {
   border: 1px solid #000;
-  width: 25px;
-  margin: auto;
-  padding: auto;
-  height: 25px;
-  border-radius: 10%;
+  width: 50px;
+  border-radius: 5px;
   font-weight: bold;
   text-align: center;
-  font-size: 15px;
+  font-size: 12px;
   background-color: rgb(213, 236, 243);
 }
 .completed {
