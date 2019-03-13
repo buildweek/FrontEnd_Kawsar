@@ -20,11 +20,7 @@ class TodoList extends Component {
     //   headers: { authorization : token }
     // }
     axios
-      .post(
-        "https://buildweek-wunderlist.herokuapp.com/api/lists",
-        this.state,
-        { "Access-Control-Allow-Origin": "*" }
-      )
+      .post("https://buildweek-wunderlist.herokuapp.com/api/lists", this.state)
       .then(res => {
         console.log("addtodo");
         console.log(res);
