@@ -16,6 +16,7 @@ class TodoList extends Component {
   }
 
   addTodo = event => {
+    event.preventDefault();
     console.log("click");
     // var token = localStorage.getItem(`token`)
     // var request = {
