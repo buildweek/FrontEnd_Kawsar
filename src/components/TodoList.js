@@ -7,11 +7,8 @@ class TodoList extends Component {
     super(props);
     this.state = {
       title: "",
-      dueDate: "",
       description: "",
-      show: "all",
-      completed: false,
-      userId: ""
+      dueDate: ""
     };
   }
 
@@ -23,7 +20,11 @@ class TodoList extends Component {
     //   headers: { authorization : token }
     // }
     axios
-      .post("https://buildweek-wunderlist.herokuapp.com/api/lists", this.state)
+      .post(
+        "https://buildweek-wunderlist.herokuapp.com/api/lists",
+        this.state,
+        { "Access-Control-Allow-Origin": "*" }
+      )
       .then(res => {
         console.log("addtodo");
         console.log(res);
@@ -33,6 +34,7 @@ class TodoList extends Component {
       .catch(err => {
         console.log(err);
       });
+    console.log("axios call end");
     this.setState({
       title: "",
       dueDate: "",
