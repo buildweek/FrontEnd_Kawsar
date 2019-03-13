@@ -2,51 +2,51 @@ import React from 'react';
 import styled from 'styled-components';
 import { Button, Form } from 'reactstrap';
 import axios from 'axios';
-const RegisterBar = styled.div`
-      display : flex;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-      width : 100%;
-      .login-form{
-          display: flex;
-          flex-wrap: wrap;
-          width: 30%;
-          margin: 5% 20% 0 0;
-          justify-content: center;
-          border: 1px solid rgb(240, 229, 229);
-          padding: 5% 0 5% 0;
-          h1{
-              font-size: 35px;
-              font-family: Luminari, 'fantasy' ;
-          }
-          .input-form{
-              width : 70%;
-              margin: 1%;
-              padding: 3%;
-              border-radius: 6px;
-              background: rgb(243, 239, 239);
-          }
-          button{
-              width: 70%;
-              margin: 2%;
-              padding: 2%;
-              border-radius: 6px;
-              font-weight: bold;
-              font-size: 14px;
-          }
-          button:hover{
-              background: pink;
-              color: rgb(10, 10, 82);
-          }
-          .textp{
-              border: 1px solid rgb(240, 229, 229);
-              width: 70%;
-              text-align: center;
-              margin: 2%;
-          }
-      }
+// const RegisterBar = styled.div`
+//       display : flex;
+//       flex-wrap: wrap;
+//       justify-content: flex-end;
+//       width : 100%;
+//       .login-form{
+//           display: flex;
+//           flex-wrap: wrap;
+//           width: 30%;
+//           margin: 5% 20% 0 0;
+//           justify-content: center;
+//           border: 1px solid rgb(240, 229, 229);
+//           padding: 5% 0 5% 0;
+//           h1{
+//               font-size: 35px;
+//               font-family: Luminari, 'fantasy' ;
+//           }
+//           .input-form{
+//               width : 70%;
+//               margin: 1%;
+//               padding: 3%;
+//               border-radius: 6px;
+//               background: rgb(243, 239, 239);
+//           }
+//           button{
+//               width: 70%;
+//               margin: 2%;
+//               padding: 2%;
+//               border-radius: 6px;
+//               font-weight: bold;
+//               font-size: 14px;
+//           }
+//           button:hover{
+//               background: pink;
+//               color: rgb(10, 10, 82);
+//           }
+//           .textp{
+//               border: 1px solid rgb(240, 229, 229);
+//               width: 70%;
+//               text-align: center;
+//               margin: 2%;
+//           }
+//       }
 
-`;
+// `;
 
 class Register extends React.Component {
   constructor() {
@@ -54,6 +54,7 @@ class Register extends React.Component {
       this.state = {
           username: '',
           password: '',
+          confirmPassword: ''
       };
   }
   handleInput = event => {
@@ -61,13 +62,18 @@ class Register extends React.Component {
   };
   handlePassword = e => {
        axios
-        .post('https://buildweek-wunderlist.herokuapp.com/api/auth/register', this.state)
-        .then(res=> console.log(res))
+        .post('https://buildweek-wunderlist.herokuapp.com/api/register', this.state)
+        .then(res => { 
+          localStorage.setItem("token", res.data.token);
+          this.props.history.push(`/login`);
+       })
+       .catch(err => console.log(err))
     };
   render(){
     return(
       <RegisterBar className ='login-box'>
-          <Form  className ='login-form'>
+          <Form  className ='login-form' onSubmit={this.handlePassword}>
+          <div className='input-form' >
               <input 
                   className ='input-form'
                   type="text"
@@ -88,14 +94,60 @@ class Register extends React.Component {
                   className ='input-form'
                   type= 'password'
                   placeholder= 'Confirm Password'
-                  name='password'
-                  value={this.state.password}
+                  name='confirmPassword'
+                  value={this.state.confirmPassword}
                   onChange={this.handleInput} 
               />
-              <Button color = 'success' onClick={this.handlePassword}> Register</Button>
+              <Button color = 'success' onClick={this.handlePassword}> Register</Button>  
+              </div>  
           </Form>
       </RegisterBar>
     );
   }
 }  
 export default Register;
+
+const RegisterBar = styled.div`
+      display : flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      width : 100%;
+      .login-form{
+          display: flex;
+          flex-wrap: wrap;
+          width: 70%;
+          margin: 5% 20% 0 0;
+          justify-content: center;
+          border: 1px solid rgb(240, 229, 229);
+          padding: 5% 0 5% 0;
+          h1{
+              font-size: 35px;
+              
+          }
+          .input-form{
+              width : 70%;
+              margin: 1%;
+              padding: 3%;
+              border-radius: 6px;
+              background: rgb(243, 239, 239);
+          }
+          button{
+              width: 70%;
+              margin: 2%;
+              padding: 2%;
+              border-radius: 6px;
+              font-weight: bold;
+              font-size: 14px;
+          }
+          button:hover{
+              background: grey;
+              color: white;
+          }
+          .textp{
+              width: 70%;
+              text-align: center;
+              margin: 2%;
+          }
+      }
+
+`;

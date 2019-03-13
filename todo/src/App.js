@@ -13,6 +13,7 @@ class App extends Component {
     this.state = {
       todos: [], 
       completed: false,
+      searchResult: [],
     };
   }
 ///////////////////////////////////////////////////////////////////////
@@ -31,7 +32,7 @@ class App extends Component {
       .catch(err => console.log(err))
   }
 
-  deleteTodo = id => {
+deleteTodo = id => {
     axios
       .delete(`https://buildweek-wunderlist.herokuapp.com/api/lists${id}`)
       .then(res=> { this.setState({todos: res.data}) ;
@@ -40,46 +41,55 @@ class App extends Component {
   }
 
 ///////////////////////////////////////////////////////////////////////
-toggleCompleted = todo => {
-  this.setState(previousState => {
-    const updatedList = previousState.todos.map(toDoItem => {
-      if (toDoItem.todo === todo) {
-        toDoItem.completed = !toDoItem.completed;
+toggleCompleted = id => {
+  this.setState({
+    todos: this.state.todos.map(todo => {
+      if(todo.id === id) {
+        return {
+          ...todo,
+          completed: !todo.completed
+        };
       }
-      return toDoItem;
-    });
-    return {
-      todos: updatedList
-    };
+      return todo;
+    })
+
   });
-};
+ };
 ///////////////////////////////////////////////////////////////////////
-clearCompleted = (e) =>{
-  e.preventDefault()
-  e.persist()
-  this.setState(preState =>{
-    const clearedList = preState.todos.filter(
-      todoItem => !todoItem.completed
-    );
-    return {
-      todos:  clearedList
-    };
+clearCompleted = e => {
+  e.preventDefault();
+   this.setState ({
+     todos: this.state.todos.filter(todo => !todo.completed)
+   });
+ };
+ //////////////////////////////////////////////////////////////////////
+ searchForLists = e => {
+  const data = this.state.todos.filter(item => {
+    if ((item.title.includes(e.target.value)) || (item.decription.includes(e.target.value))) {
+      return item;
+    }
   });
-}
+  this.setState({ searchResult: data});
+};
+
 render() {
   return (
     <div className="App">
       <Route path ='/login' component = {Login} />
       <Route path ='/register' component = {Register} />
-      <Route exact path= '/' component = {Nav} />
+      <Route exact path= '/' render={() => < Nav searchForLists = {this.searchForLists} />} />
       <Route exact path="/" render={() => 
           <TodoList 
-            todos={this.state.todos} 
+            todos={
+              this.state.searchResult.length > 0 ?
+              this.state.searchResult : this.state.todos
+              } 
             deleteTodo={this.deleteTodo}
             completed ={this.completed}
             toggleCompleted= {this.toggleCompleted}
             clearCompleted={this.clearCompleted}
             addTodo = {this.addTodo}
+            
            />} 
       />
     </div>
