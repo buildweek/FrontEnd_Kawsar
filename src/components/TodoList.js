@@ -14,7 +14,7 @@ class TodoList extends Component {
 
   addTodo = event => {
     let token = localStorage.getItem(`token`);
-    let header = {
+    let headers = {
       headers: { authorization: token }
     };
     event.preventDefault();
@@ -28,7 +28,7 @@ class TodoList extends Component {
       .post(
         "https://buildweek-wunderlist.herokuapp.com/api/lists",
         this.state,
-        header
+        headers
       )
       .then(res => {
         console.log("addtodo");
