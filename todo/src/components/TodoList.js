@@ -16,15 +16,16 @@ class TodoList extends Component {
   } 
   
   addTodo = event => {
-    event.preventDefault();
-    var token = localStorage.getItem(`token`)
-    var request = {
-      headers: { authorization : token }
-    }
+    // var token = localStorage.getItem(`token`)
+    // var request = {
+    //   headers: { authorization : token }
+    // }
     axios
-      .post('https://buildweek-wunderlist.herokuapp.com/api/lists', this.state, request )
+      .post('https://buildweek-wunderlist.herokuapp.com/api/lists', this.state)
       .then(res => {
+        console.log('addtodo');
         console.log(res);
+        this.setState({ id: res.id });
         this.props.history.push('/lists');
       })
       .catch(err => {

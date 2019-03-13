@@ -73,6 +73,9 @@ const LoginBar = styled.div`
           justify-content: center;
           border: 1px solid rgb(240, 229, 229);
           padding: 5% 0 5% 0;
+          @media (min-width: 800px) {
+              width: 30%;
+          }
           h1{
               font-size: 35px;
               

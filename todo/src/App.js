@@ -14,6 +14,7 @@ class App extends Component {
       todos: [], 
       completed: false,
       searchResult: [],
+      id : ''
     };
   }
 ///////////////////////////////////////////////////////////////////////
@@ -26,18 +27,23 @@ class App extends Component {
     axios
       .get("https://buildweek-wunderlist.herokuapp.com/api/lists", request)
       .then(response => {
-        console.log(response);
-        this.setState({ todos: response.data })
+        console.log('cmd' ,response);
+        this.setState({ todos: response.data, id: response.id })
       })
       .catch(err => console.log(err))
   }
 
 deleteTodo = id => {
+    // var token = localStorage.getItem(`token`)
+    // var request = {
+    //   headers: { authorization : token }
+    // }
     axios
-      .delete(`https://buildweek-wunderlist.herokuapp.com/api/lists${id}`)
-      .then(res=> { this.setState({todos: res.data}) ;
-         this.props.history.push("/todos" );})
-      .catch(console.log);
+      .delete(`https://buildweek-wunderlist.herokuapp.com/api/lists/${id}`)
+      .then(res=> { this.setState({todos: res.data, id: res.id}) ;
+        console.log('deleteTodo', res);
+         this.props.history.push("/lists" );})
+      .catch(err=> console.log(err));
   }
 
 ///////////////////////////////////////////////////////////////////////
@@ -77,7 +83,7 @@ render() {
     <div className="App">
       <Route path ='/login' component = {Login} />
       <Route path ='/register' component = {Register} />
-      <Route path= '/' render={() => < Nav searchForLists = {this.searchForLists} />} />
+      <Route path= '/lists' render={() => < Nav searchForLists = {this.searchForLists} />} />
       <Route exact path="/lists" render={() => 
           <TodoList 
             todos={

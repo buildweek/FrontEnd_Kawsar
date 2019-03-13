@@ -6,7 +6,7 @@ const Nav = (props) => {
   return ( 
     <NavBar>
       <div className= 'wrapper'>
-      <NavLink  className= 'bar' exact to='/'> Home </NavLink>
+      <NavLink  className= 'bar' exact to='/lists'> Home </NavLink>
       <div className= 'search' >
                         <input  className = 'input-search'
                                 name = 'input search'
