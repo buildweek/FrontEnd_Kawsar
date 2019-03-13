@@ -19,6 +19,7 @@ class TodoList extends Component {
     };
     event.preventDefault();
     console.log("click");
+    console.log(this.state);
     // var token = localStorage.getItem(`token`)
     // var request = {
     //   headers: { authorization : token }
