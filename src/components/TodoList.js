@@ -10,7 +10,8 @@ class TodoList extends Component {
         title: "",
         description: "",
         dueDate: ""
-      }
+      },
+      show: "all"
     };
   }
 
