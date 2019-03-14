@@ -6,18 +6,20 @@ class TodoList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: "",
-      description: "",
-      dueDate: ""
+      user: {
+        title: "",
+        description: "",
+        dueDate: ""
+      }
     };
   }
 
   addTodo = event => {
+    event.preventDefault();
     let token = localStorage.getItem(`token`);
     let headers = {
       headers: { authorization: token }
     };
-    event.preventDefault();
     console.log("click");
     console.log(this.state);
     // var token = localStorage.getItem(`token`)
@@ -27,7 +29,7 @@ class TodoList extends Component {
     axios
       .post(
         "https://buildweek-wunderlist.herokuapp.com/api/lists",
-        this.state,
+        this.state.user,
         headers
       )
       .then(res => {
