@@ -22,7 +22,6 @@ class Register extends React.Component {
           this.props.history.push(`/login`);
        })
        .catch(err => console.log(err),
-       this.props.history.push(`/login`)
        )
     };
   render(){
@@ -46,14 +45,6 @@ class Register extends React.Component {
                   value={this.state.password}
                   onChange={this.handleInput} 
               />
-              {/* <input
-                  className ='input-form'
-                  type= 'password'
-                  placeholder= 'Confirm Password'
-                  name='confirmPassword'
-                  value={this.state.confirmPassword}
-                  onChange={this.handleInput} 
-              /> */}
               <Button color = 'success' onClick={this.handlePassword}> Register</Button>  
               </div>  
           </Form>

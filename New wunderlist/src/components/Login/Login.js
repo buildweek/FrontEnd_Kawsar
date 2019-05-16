@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Button, Form } from 'reactstrap';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 class Login extends React.Component {
   constructor() {
@@ -49,8 +50,7 @@ class Login extends React.Component {
               />
               
               <Button color = 'success' onClick={this.handlePassword}>Log in</Button>
-              <a href= 'https://buildweek-wunderlist.herokuapp.com/api/register'>   
-              <span className= 'textp'> <p> Don't have and account ? <button>Register</button></p></span> </a>
+              <Link to ='/register'> Dont Have an account? Register Here </Link>
           </Form>
       </LoginBar>
     );
@@ -102,6 +102,14 @@ const LoginBar = styled.div`
               width: 70%;
               text-align: center;
               margin: 2%;
+          }
+          a{
+              text-decoration: none;
+              color: blue;
+
+          }
+          a:hover{
+              color: grey;
           }
       }
 
